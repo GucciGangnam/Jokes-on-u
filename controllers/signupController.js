@@ -65,16 +65,41 @@ exports.signup_post = [
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
         const { firstname, lastname, email, username } = req.body;
+        try {
+            // Check if username already exists
+            const existingUsername = await Users.findOne({ USERNAME: req.body.username }).exec();
+            if (existingUsername) {
+                throw new Error('Username already exists');
+            }
+            // Check if email is already in use
+            const existingEmail = await Users.findOne({ EMAIL: req.body.email }).exec();
+            if (existingEmail) {
+                throw new Error("This email is already in use bozo");
+            }
+            // Check if passwords match
+            const userPass = req.body.password;
+            const userConfirmedPass = req.body.confirmPassword;
+            if (userPass !== userConfirmedPass) {
+                throw new Error("Passwords don't match");
+            }
+        } catch (error) {
+            // Handle the case where the username, email, or passwords don't match
+            return res.render("signup", {
+                errors: [{ msg: error.message }],
+                formData: { firstname, lastname, email, username }
+            });
+        }
         if (!errors.isEmpty()) {
             console.log(errors);
             return res.render("signup", { errors: errors.array(), formData: { firstname, lastname, email, username } });
         }
         try {
             const userId = uuid.v4();
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
             const newMember = new Users({
                 USER_ID: userId,
                 USERNAME: req.body.username,
-                PASSWORD: req.body.password,
+                PASSWORD: hashedPassword,
                 EMAIL: req.body.email,
                 FIRST_NAME: req.body.firstname,
                 LAST_NAME: req.body.lastname,
@@ -88,5 +113,9 @@ exports.signup_post = [
         }
     })
 ];
+
+
+
+
 
 

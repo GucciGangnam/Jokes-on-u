@@ -38,6 +38,11 @@
         <label for="password">Password:</label>
         <input name="password" type="password" id="password" required>
 
+        <br/>
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <input name="confirmPassword" type="password" id="confirmPassword" required>
+
         <br>
         <% if (typeof errors !== 'undefined' && Array.isArray(errors) && errors.length > 0) { %>
             <ul class="error-list">
