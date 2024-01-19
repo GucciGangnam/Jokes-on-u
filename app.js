@@ -5,9 +5,31 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
 
 var app = express();
+
+// MONGODB CONFIGURATION (USING DOTEVN)
+// Set up mongoose connection
+const dotenv = require('dotenv').config();
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const mongoDB = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@membersonly.gowzsbg.mongodb.net/members_only?retryWrites=true&w=majority`;
+main().catch((err) => console.error(err));
+async function main() {
+  try {
+    await mongoose.connect(mongoDB);
+    console.log('Connected to MongoDB');
+    // Get the list of all collections in the database
+  const collections = await mongoose.connection.db.listCollections().toArray();
+  // Log the names of all collections
+  collections.forEach((collection) => {
+    console.log(collection.name);
+  });
+  } catch (err) {
+    console.error('Error connecting to MongoDB:', err);
+  }
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +42,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
