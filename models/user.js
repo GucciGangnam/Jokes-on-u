@@ -26,8 +26,12 @@ const usersSchema = new Schema({
         type: String,
         required: true,
     },
-    STATUS: {
-        type: String,
+    VIP: { 
+        type: Boolean,
+        required: true,
+    },
+    ADMIN: {
+        type: Boolean,
         required: true,
     },
 }, { collection: 'Users' }); // Specify the collection name here

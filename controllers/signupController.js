@@ -10,11 +10,18 @@ const uuid = require('uuid');
 const { body, validationResult } = require("express-validator");
 // Import Bcryptjs
 const bcrypt = require('bcryptjs');
+const { render } = require("../app");
 
 
 // Display Sign Up Page
 exports.signup_get = (req, res, next) => {
-    res.render("signup", { formData: {} });
+    const user = req.user; 
+    if (user) { 
+        res.redirect("/home");
+    } else { 
+        res.render("signup", { formData: {}, user: user} );
+    }
+
 }
 
 // MAKE A MEMBER
@@ -97,13 +104,14 @@ exports.signup_post = [
             const userId = uuid.v4();
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
             const newMember = new Users({
-                USER_ID: userId,
+                USER_ID: ('UID_' + userId),
                 USERNAME: req.body.username,
                 PASSWORD: hashedPassword,
                 EMAIL: req.body.email,
                 FIRST_NAME: req.body.firstname,
                 LAST_NAME: req.body.lastname,
-                STATUS: "Noob"
+                VIP: false,
+                ADMIN: false
             });
             await newMember.save();
             res.redirect('/home');

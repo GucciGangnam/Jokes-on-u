@@ -1,19 +1,72 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Home</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <div class="NavBar">
-      <a href="/">Home</a>
-      <a href="/signup">Sign Up</a>
-      <a href="/login">Log in</a>
-      <a href="/users">Users</a>
-    </div>
-    <h1>HomePage</h1>
-    <p>User Count: <%= allUsersCount %></p>
-    <p>Message Count: </p>
-    <p>Message Board... </p>
-  </body>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='../stylesheets/style.css' />
+  <title>Home</title>
+</head>
+
+<body>
+  <div class="NavBar">
+    <% if (user) { %>
+      <p>Hello <%= user.USERNAME %>
+      </p>
+      <% } %>
+        <a class="NavButtonLink" href="/">Home</a>
+        <% if (!user) { %>
+          <a class="NavButtonLink" href="/signup">Sign Up</a>
+          <% } %>
+            <% if (user) { %>
+              <a class="NavButtonLink" href="/logout">Log out</a>
+              <% } else { %>
+                <a class="NavButtonLink" href="/login">Log in</a>
+                <% } %>
+                  <!-- <a class="NavButtonLink" href="/users">Users</a> -->
+                  <% if (user) { %>
+                    <a class="NavButtonLink" href="/account"> My Account</a>
+                    <% } %>
+  </div>
+  <h1>Message Board</h1>
+  <% if (user) { %>
+    <a href="/message" class="buttonLink">New Message</a>
+    <% } %>
+      <div class="messageBoard">
+        <% if (user) { %>
+          <% allMessages.reverse().forEach(msg=> { %>
+            <div class="message">
+              <% if (user.VIP) { %>
+                <div class="messageAuthor">
+                  <%= msg.MESSAGE_AUTHOR %>
+                </div>
+                <% } else { %>
+                  <div class="messageAuthorHidden">
+                    *****
+                  </div>
+                  <% } %>
+                    <div class="messageContent">
+                      <%= msg.MESSAGE_CONTENT %>
+                    </div>
+                    <div class="messageTimestamp">
+                      <%= msg.MESSAGE_TIMESTAMP.toLocaleString() %>
+                    </div>
+
+                    <% if (user.ADMIN) { %>
+                      <a href="/delete-message/<%= msg.MESSAGE_ID %>" class="DeleteButton">Delete</a>
+                      <% } %>
+
+
+
+            </div>
+            <% }); %>
+              <% } else { %>
+                <a href="/signup" class="buttonLink">Sign up to see messages</a>
+                <P>There are <%= allMsgCount %> on this board </P>
+                <% } %>
+      </div>
+
+
+</body>
+
 </html>

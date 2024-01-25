@@ -3,57 +3,72 @@
 
 <head>
     <title>Sign Up</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='../stylesheets/style.css' />
 </head>
 
 <body>
     <div class="NavBar">
-        <a href="/">Home</a>
-        <a href="/signup">Sign Up</a>
-        <a href="/login">Log in</a>
-        <a href="/users">Users</a>
+        <% if (user) { %>
+            <p>Hello <%= user.USERNAME %>
+            </p>
+            <% } %>
+                <a href="/">Home</a>
+                <a href="/signup">Sign Up</a>
+                <% if (user) { %>
+                    <a href="/logout">Log out</a>
+                <% } else { %>
+                    <a href="/login">Log in</a>
+                <% } %>
+                <a href="/users">Users</a>
     </div>
     <h1>Sign Up</h1>
     <form action="/signup" method="post">
         <label for="firstName">First Name:</label>
-        <input name="firstname" type="text" id="firstName" required value="<%= formData && formData.firstname ? formData.firstname : '' %>">
+        <input name="firstname" type="text" id="firstName" required
+            value="<%= formData && formData.firstname ? formData.firstname : '' %>">
 
         <br>
 
         <label for="lastName">Last Name:</label>
-        <input name="lastname" type="text" id="lastName" required value="<%= formData && formData.lastname ? formData.lastname : '' %>">
+        <input name="lastname" type="text" id="lastName" required
+            value="<%= formData && formData.lastname ? formData.lastname : '' %>">
 
         <br>
 
         <label for="email">Email Address:</label>
-        <input name="email" type="email" id="email" required value="<%= formData && formData.email ? formData.email : '' %>">
+        <input name="email" type="email" id="email" required
+            value="<%= formData && formData.email ? formData.email : '' %>">
 
         <br>
 
         <label for="username">Username:</label>
-        <input name="username" type="text" id="username" required value="<%= formData && formData.username ? formData.username : '' %>">
+        <input name="username" type="text" id="username" required
+            value="<%= formData && formData.username ? formData.username : '' %>">
 
         <br>
 
         <label for="password">Password:</label>
-        <input name="password" type="password" id="password" required>
+        <input name="password" type="password" id="password" required minlength="6">
 
-        <br/>
+        <br />
 
         <label for="confirmPassword">Confirm Password:</label>
         <input name="confirmPassword" type="password" id="confirmPassword" required>
 
         <br>
-        <% if (typeof errors !== 'undefined' && Array.isArray(errors) && errors.length > 0) { %>
+        <% if (typeof errors !=='undefined' && Array.isArray(errors) && errors.length> 0) { %>
             <ul class="error-list">
-                <% errors.forEach(error => { %>
+                <% errors.forEach(error=> { %>
                     <li>
                         <%= error.msg %>
                     </li>
-                <% }); %>
+                    <% }); %>
             </ul>
-        <% } %>
+            <% } %>
                 <button type="submit">Sign up</button>
+                <p> Already have an account? 
+                    <a href="/login">Log in</a>
+                </p>
     </form>
 </body>
 

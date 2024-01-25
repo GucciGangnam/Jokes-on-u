@@ -3,15 +3,25 @@
 
 <head>
     <title>Sign Up</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='../stylesheets/style.css' />
 </head>
 
 <body>
     <div class="NavBar">
-        <a href="/">Home</a>
-        <a href="/signup">Sign Up</a>
-        <a href="/login">Log in</a>
-        <a href="/users">Users</a>
+        <% if (user) { %>
+            <p>Hello <%= user.USERNAME %>
+            </p>
+            <% } %>
+                <a class="NavButtonLink" href="/">Home</a>
+                <% if (!user) { %>
+                    <a class="NavButtonLink" href="/signup">Sign Up</a>
+                    <% } %>
+                        <% if (user) { %>
+                            <a class="NavButtonLink" href="/logout">Log out</a>
+                            <% } else { %>
+                                <a class="NavButtonLink" href="/login">Log in</a>
+                                <% } %>
+                                    <a class="NavButtonLink" href="/users">Users</a>
     </div>
     <h1>Login</h1>
     <form action="/login" method="post">
@@ -26,7 +36,7 @@
 
         <br>
 
-        <button type="submit">Sign up</button>
+        <button type="submit">Log in</button>
     </form>
 </body>
 

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Users</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='../stylesheets/style.css' />
+    <title>Home</title>
 </head>
 
 <body>
@@ -23,20 +25,20 @@
                                 <% } %>
                                     <a class="NavButtonLink" href="/users">Users</a>
     </div>
-    <h1>User List</h1>
-    <% allUsers.forEach(user=> { %>
-        <p>
-            <%= user.USERNAME %>
-        </p>
-        <p>
-            <%= user.USER_ID %>
-        </p>
-        <p>
-            <%= user.STATUS %>
-        </p>
-        <br />
-        <% });%>
-
+    <h1> new mesage form </h1>
+    <form action="/message" method="post">
+        <label for="title">
+            Title
+        </label>
+        <input type="text" name="title" id="title" required>
+        </input>
+        <label for="message">
+            Message
+        </label>
+        <input type="text" name="message" id="message" required>
+        </input>
+        <button type="submit">Post</button>
+    </form>
 </body>
 
 </html>
