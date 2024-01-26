@@ -49,6 +49,7 @@ router.get("/account", account_controller.account_get)
 router.post("/account", account_controller.code_post)
 
 router.get('/delete-account', account_controller.delete_account_get)
+router.post('/delete-account', account_controller.delete_account_post)
 
 module.exports = router;
 

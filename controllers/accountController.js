@@ -38,3 +38,8 @@ exports.delete_account_get = asyncHandler(async(req, res, next) => {
     const user = req.user;
     res.render("deleteAccount", { user: user });
 })
+
+exports.delete_account_post = asyncHandler(async(req, res, next) => { 
+    const user = req.user;
+    res.send("delete" + user.USERNAME)
+})
