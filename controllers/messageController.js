@@ -15,9 +15,9 @@ exports.message_get = asyncHandler(async (req, res, next) => {
     res.render("newMessage", { user: user });
 })
 
-exports.message_post = asyncHandler(async (req, res, bext) => {
-    const title = req.body.title;
-    const message = req.body.message;
+exports.message_post = asyncHandler(async (req, res, next) => {
+    const title = req.body.title.charAt(0).toUpperCase() + req.body.title.slice(1);
+    const message = req.body.message.charAt(0).toUpperCase() + req.body.title.slice(1);
     const auther = req.user.USERNAME;
     const authorID = req.user.USER_ID;
     const msgID = ("MSG_ID" + uuid.v4())
@@ -37,11 +37,13 @@ exports.message_post = asyncHandler(async (req, res, bext) => {
 
 exports.delete_message = asyncHandler(async (req, res, next) => {
     const user = req.user
-    if (user.ADMIN) {
-        const messageID = req.params.messageID;
-        // find message by message ID 
-        const message = await Message.find({ MESSAGE_ID: messageID })
-        const msgtxt = message[0].MESSAGE_CONTENT;
+    const messageID = req.params.messageID;
+    // find message by message ID 
+    const message = await Message.find({ MESSAGE_ID: messageID })
+    const userID = user.USER_ID
+    console.log(userID)
+    console.log(messageID)
+    if (user.ADMIN || userID == message[0].MESSAGE_AUTHOR_ID) {
         // delet the message 
         await Message.deleteOne({MESSAGE_ID: messageID})
         // render message board (home screen)

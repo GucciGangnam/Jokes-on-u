@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Log In</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='../stylesheets/style.css' />
+    <title>Delet Account</title>
 </head>
 
 <body>
@@ -31,22 +33,13 @@
                         <% } %>
         </div>
     </div>
-    <h1>Login</h1>
-    <form action="/login" method="post">
-
-        <label for="username">Username:</label>
-        <input name="username" type="text" id="username" required>
-
-        <br>
-
-        <label for="password">Password:</label>
-        <input name="password" type="password" id="password" required>
-
-        <br>
-
-        <button type="submit">Log in</button>
+    
+    <form>
+        Are you sure you want to dleet your account?
+        - Your account will be un-recoverable 
+        - All your posts will be delted forever
+        <a class="NavButtonLink" href="/">Home</a>
+        <button type="submit">Delete</button>
     </form>
+
 </body>
-
-
-</html>

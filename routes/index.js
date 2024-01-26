@@ -48,5 +48,7 @@ router.get('/delete-message/:messageID', message_controller.delete_message)
 router.get("/account", account_controller.account_get)
 router.post("/account", account_controller.code_post)
 
+router.get('/delete-account', account_controller.delete_account_get)
+
 module.exports = router;
 

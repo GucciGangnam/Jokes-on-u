@@ -147,13 +147,19 @@ input:invalid {
   align-items: center;
 }
 
+.BecomeVIPMsg{ 
+  padding-top: 15px;
+  color: rgb(165, 165, 165);
+}
 .message {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   border-radius: 8px;
   margin: 10px;
   padding: 15px;
-  width: 300px;
+  min-width: 40vw;
+  width: 400px;
+  max-width: 900px;
 }
 
 .messageAuthor {
@@ -187,17 +193,32 @@ input:invalid {
 
 /* account */
 .AccountInfo {
-  width: 40%;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   background-color: #fff;
+  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+  margin: 20px;
+
+  display: flex;
+}
+.AccInfoLeft{
+  flex: 1
+}
+.AccInfoRight{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid grey;
 }
 
+
 .AccountInfo p {
+  text-align: left;
   margin: 0;
+  padding: 5px;;
 }
 
 .AccountInfo label {
@@ -212,17 +233,24 @@ input:invalid {
   box-sizing: border-box;
 }
 
-.AccountInfo button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.AccountInfo a {
+  margin-top: 0px;
+  background-color: #ff5555;
 }
+.AccountInfo a:hover {
+  margin-top: 0px;
+  background-color: #e73e3e;
+}
+
 
 /* Additional styles for form error message */
 .error-message {
   color: red;
   margin-top: 10px;
+}
+
+.SecretMesage{ 
+  color: rgb(167, 167, 167);
+  text-align: center;
+  padding-bottom: 20px;
 }

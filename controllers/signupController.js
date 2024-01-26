@@ -93,7 +93,8 @@ exports.signup_post = [
             // Handle the case where the username, email, or passwords don't match
             return res.render("signup", {
                 errors: [{ msg: error.message }],
-                formData: { firstname, lastname, email, username }
+                formData: { firstname, lastname, email, username },
+                user: req.body.user,
             });
         }
         if (!errors.isEmpty()) {

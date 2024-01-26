@@ -13,7 +13,8 @@
     <div class="NavLeft">
       <a class="NavButtonLink" href="/">Home</a>
       <% if (user) { %>
-        <div class="NavWlc"> Welcome, <%= user.USERNAME %></div> 
+        <div class="NavWlc"> Welcome, <%= user.USERNAME %>
+        </div>
         <% } %>
     </div>
 
@@ -37,9 +38,16 @@
 
 
   <h1>Joke Board</h1>
+
   <% if (user) { %>
     <a href="/message" class="buttonLink">New Joke</a>
-    <% } %>
+    <% if (!user.VIP) { %> <div class="BecomeVIPMsg">Visit <a href="/account">My Account</a> to become a VIP and see the joke set-ups</div><%}%>
+    <%} %>
+
+    
+
+
+
       <div class="messageBoard">
         <% if (user) { %>
           <% allMessages.reverse().forEach(msg=> { %>
@@ -57,23 +65,21 @@
                       <%= msg.MESSAGE_CONTENT %>
                     </div>
                     <div class="messageTimestamp">
-                      <%= msg.MESSAGE_TIMESTAMP.toLocaleString() %>
+                      Posted by: <%= msg.MESSAGE_AUTHOR %>
                     </div>
                     <div class="messageTimestamp">
-                      <%= msg.MESSAGE_AUTHOR %>
+                      <%= msg.MESSAGE_TIMESTAMP.toLocaleString() %>
                     </div>
-
-                    <% if (user.ADMIN) { %>
+                    <% if (user.ADMIN || (user.USER_ID===msg.MESSAGE_AUTHOR_ID && !user.Admin)) { %>
                       <a href="/delete-message/<%= msg.MESSAGE_ID %>" class="DeleteButton">Delete</a>
                       <% } %>
-
-
-
             </div>
             <% }); %>
               <% } else { %>
                 <a href="/signup" class="buttonLink">Sign up to see jokes</a>
-                <P><%= allMsgCount %> jokes posted so far </P>
+                <P>
+                  <%= allMsgCount %> jokes posted so far
+                </P>
                 <% } %>
       </div>
 

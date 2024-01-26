@@ -6,8 +6,7 @@ const Messages = require("../models/message");
 // Import async handler
 const asyncHandler = require("express-async-handler");
 
-// Import passport for authentication
-const passport = require('passport');
+
 
 // Home Controller
 exports.home = asyncHandler(async (req, res, next) => {

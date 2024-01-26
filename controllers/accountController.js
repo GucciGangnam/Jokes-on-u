@@ -33,3 +33,8 @@ exports.code_post = asyncHandler(async (req, res, next) => {
         res.render("account", {user:user, correct:false})
     }
 })
+
+exports.delete_account_get = asyncHandler(async(req, res, next) => { 
+    const user = req.user;
+    res.render("deleteAccount", { user: user });
+})

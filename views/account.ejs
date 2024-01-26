@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='../stylesheets/style.css' />
-    <title>Home</title>
+    <title>My Account</title>
 </head>
 
 <body>
@@ -34,22 +34,28 @@
         </div>
     </div>
     <div class="AccountInfo">
-        <p>First Name: <%= user.FIRST_NAME %>
-        </p>
-        <p>Last Name: <%= user.LAST_NAME %>
-        </p>
-        </br>
-        <p>UserName: <%= user.USERNAME %>
-        </p>
-        </br>
-        <p>VIP member: <% if (!user.ADMIN) { %> Nope <%} else {%> Yep <%}%>
-        </p>
+        <div class="AccInfoLeft">
+            <p>First Name: <strong><%= user.FIRST_NAME %></strong>
+            </p>
+            <p>Last Name: <strong><%= user.LAST_NAME %></strong>
+            </p>
+            </br>
+            <p>UserName: <strong><%= user.USERNAME %></strong>
+            </p>
+            </br>
+            <p>VIP member: <% if (!user.VIP) { %><strong>Nope</strong> <%} else {%> <strong>Yep</strong> <%}%>
+            </p>
+        </div>
+        <div class="AccInfoRight">
+            <a class="NavButtonLink" href="/delete-account">Delete Account</a>
+        </div>
     </div>
     <% if (user.ADMIN) { %>
         <p> This is an admin account</p>
         <%}%>
             <% if (!user.VIP) { %>
                 <form action="/account" method="post">
+                    <div class="SecretMesage">Enter the secret answer to become a VIP member and see joke set-ups</div>
                     <labeL for="code">Secret Code</labeL>
                     <% if (typeof correct !=='undefined' && !correct) { %>
                         <p class="error-message">Sorry, wrong answer</p>
