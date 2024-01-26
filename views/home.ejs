@@ -36,7 +36,7 @@
 
 
 
-  <h1>Message Board</h1>
+  <h1>Joke Board</h1>
   <% if (user) { %>
     <a href="/message" class="buttonLink">New Joke</a>
     <% } %>
@@ -46,7 +46,7 @@
             <div class="message">
               <% if (user.VIP) { %>
                 <div class="messageAuthor">
-                  <%= msg.MESSAGE_AUTHOR %>
+                  <%= msg.MESSAGE_TITLE %>
                 </div>
                 <% } else { %>
                   <div class="messageAuthorHidden">
@@ -59,6 +59,9 @@
                     <div class="messageTimestamp">
                       <%= msg.MESSAGE_TIMESTAMP.toLocaleString() %>
                     </div>
+                    <div class="messageTimestamp">
+                      <%= msg.MESSAGE_AUTHOR %>
+                    </div>
 
                     <% if (user.ADMIN) { %>
                       <a href="/delete-message/<%= msg.MESSAGE_ID %>" class="DeleteButton">Delete</a>
@@ -69,7 +72,7 @@
             </div>
             <% }); %>
               <% } else { %>
-                <a href="/signup" class="buttonLink">Sign up to see messages</a>
+                <a href="/signup" class="buttonLink">Sign up to see jokes</a>
                 <P><%= allMsgCount %> jokes posted so far </P>
                 <% } %>
       </div>

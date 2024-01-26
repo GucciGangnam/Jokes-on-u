@@ -187,7 +187,7 @@ input:invalid {
 
 /* account */
 .AccountInfo {
-  max-width: 400px;
+  width: 40%;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
