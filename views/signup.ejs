@@ -8,18 +8,28 @@
 
 <body>
     <div class="NavBar">
-        <% if (user) { %>
-            <p>Hello <%= user.USERNAME %>
-            </p>
-            <% } %>
-                <a href="/">Home</a>
-                <a href="/signup">Sign Up</a>
-                <% if (user) { %>
-                    <a href="/logout">Log out</a>
-                <% } else { %>
-                    <a href="/login">Log in</a>
+        <div class="NavLeft">
+            <a class="NavButtonLink" href="/">Home</a>
+            <% if (user) { %>
+                <div class="NavWlc"> Welcome, <%= user.USERNAME %>
+                </div>
                 <% } %>
-                <a href="/users">Users</a>
+        </div>
+
+        <div class="NavMid">
+            JokesOnU
+        </div>
+
+        <div class="NavRight">
+            <% if (!user) { %>
+                <a class="NavButtonLink" href="/signup">Sign Up</a>
+                <a class="NavButtonLink" href="/login">Log in</a>
+                <% } %>
+                    <% if (user) { %>
+                        <a class="NavButtonLink" href="/account"> My Account</a>
+                        <a class="NavButtonLink" href="/logout">Log out</a>
+                        <% } %>
+        </div>
     </div>
     <h1>Sign Up</h1>
     <form action="/signup" method="post">
@@ -66,7 +76,7 @@
             </ul>
             <% } %>
                 <button type="submit">Sign up</button>
-                <p> Already have an account? 
+                <p> Already have an account?
                     <a href="/login">Log in</a>
                 </p>
     </form>

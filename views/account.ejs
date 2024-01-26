@@ -10,23 +10,28 @@
 
 <body>
     <div class="NavBar">
-        <% if (user) { %>
-            <p>Hello <%= user.USERNAME %>
-            </p>
-            <% } %>
-                <a class="NavButtonLink" href="/">Home</a>
-                <% if (!user) { %>
-                    <a class="NavButtonLink" href="/signup">Sign Up</a>
-                    <% } %>
-                        <% if (user) { %>
-                            <a class="NavButtonLink" href="/logout">Log out</a>
-                            <% } else { %>
-                                <a class="NavButtonLink" href="/login">Log in</a>
-                                <% } %>
-                                    <!-- <a class="NavButtonLink" href="/users">Users</a> -->
-                                    <% if (user) { %>
-                                        <a class="NavButtonLink" href="/account"> My Account</a>
-                                        <% } %>
+        <div class="NavLeft">
+            <a class="NavButtonLink" href="/">Home</a>
+            <% if (user) { %>
+                <div class="NavWlc"> Welcome, <%= user.USERNAME %>
+                </div>
+                <% } %>
+        </div>
+
+        <div class="NavMid">
+            JokesOnU
+        </div>
+
+        <div class="NavRight">
+            <% if (!user) { %>
+                <a class="NavButtonLink" href="/signup">Sign Up</a>
+                <a class="NavButtonLink" href="/login">Log in</a>
+                <% } %>
+                    <% if (user) { %>
+                        <a class="NavButtonLink" href="/account"> My Account</a>
+                        <a class="NavButtonLink" href="/logout">Log out</a>
+                        <% } %>
+        </div>
     </div>
     <div class="AccountInfo">
         <p>First Name: <%= user.FIRST_NAME %>
@@ -37,7 +42,7 @@
         <p>UserName: <%= user.USERNAME %>
         </p>
         </br>
-        <p>VIP member: <%= user.VIP %>
+        <p>VIP member: <% if (!user.ADMIN) { %> Nope <%} else {%> Yep <%}%>
         </p>
     </div>
     <% if (user.ADMIN) { %>
