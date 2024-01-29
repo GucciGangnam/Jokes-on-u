@@ -41,47 +41,57 @@
 
   <% if (user) { %>
     <a href="/message" class="buttonLink">New Joke</a>
-    <% if (!user.VIP) { %> <div class="BecomeVIPMsg">Visit <a href="/account">My Account</a> to become a VIP and see the joke set-ups</div><%}%>
-    <%} %>
+    <% if (!user.VIP) { %>
+      <div class="BecomeVIPMsg">Visit <a href="/account">My Account</a> to become a VIP and see the joke set-ups</div>
+      <%}%>
+        <%} %>
 
-    
 
 
 
-      <div class="messageBoard">
-        <% if (user) { %>
-          <% allMessages.reverse().forEach(msg=> { %>
-            <div class="message">
-              <% if (user.VIP) { %>
-                <div class="messageAuthor">
-                  <%= msg.MESSAGE_TITLE %>
-                </div>
-                <% } else { %>
-                  <div class="messageAuthorHidden">
-                    *****
-                  </div>
-                  <% } %>
-                    <div class="messageContent">
-                      <%= msg.MESSAGE_CONTENT %>
+
+          <div class="messageBoard">
+            <% if (user) { %>
+              <% allMessages.reverse().forEach(msg=> { %>
+                <div class="message">
+                  <% if (user.VIP) { %>
+                    <div class="messageAuthor">
+                      <%= msg.MESSAGE_TITLE %>
                     </div>
-                    <div class="messageTimestamp">
-                      Posted by: <%= msg.MESSAGE_AUTHOR %>
-                    </div>
-                    <div class="messageTimestamp">
-                      <%= msg.MESSAGE_TIMESTAMP.toLocaleString() %>
-                    </div>
-                    <% if (user.ADMIN || (user.USER_ID===msg.MESSAGE_AUTHOR_ID && !user.Admin)) { %>
-                      <a href="/delete-message/<%= msg.MESSAGE_ID %>" class="DeleteButton">Delete</a>
+                    <% } else { %>
+                      <div class="messageAuthorHidden">
+                        *****
+                      </div>
                       <% } %>
-            </div>
-            <% }); %>
-              <% } else { %>
-                <a href="/signup" class="buttonLink">Sign up to see jokes</a>
-                <P>
-                  <%= allMsgCount %> jokes posted so far
-                </P>
-                <% } %>
-      </div>
+                        <div class="messageContent">
+                          <%= msg.MESSAGE_CONTENT %>
+                        </div>
+                        <div class="messageTimestamp">
+                          Posted by: <%= msg.MESSAGE_AUTHOR %>
+                        </div>
+                        <div class="messageTimestamp">
+                          <%= msg.MESSAGE_TIMESTAMP.toLocaleString() %>
+                        </div>
+                        <% if (user.ADMIN || (user.USER_ID!==msg.MESSAGE_AUTHOR_ID && !user.Admin)) { %>
+                          <div>
+                          <a href="/applaud-message/<%= msg.MESSAGE_ID %>" class="Applaud">👏</a>
+                          <%= msg.MESSAGE_APPLAUSE %>
+                        </div>
+                          <% } %>
+                        <% if (user.ADMIN || (user.USER_ID===msg.MESSAGE_AUTHOR_ID && !user.Admin)) { %>
+                          <div>
+                            <a href="/delete-message/<%= msg.MESSAGE_ID %>" class="DeleteButton">Delete</a>
+                          </div>
+                          <% } %>
+                </div>
+                <% }); %>
+                  <% } else { %>
+                    <a href="/signup" class="buttonLink">Sign up to see jokes</a>
+                    <P>
+                      <%= allMsgCount %> jokes posted so far
+                    </P>
+                    <% } %>
+          </div>
 
 
 </body>

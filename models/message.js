@@ -25,6 +25,10 @@ const messagesSchema = new Schema({
     MESSAGE_AUTHOR_ID: { 
         type: String, 
         required: true,
+    }, 
+    MESSAGE_APPLAUSE: { 
+        type: Number,
+        required: true
     }
 }, { collection: 'Messages' }); // Specify the collection name here
 

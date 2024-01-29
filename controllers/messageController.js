@@ -29,7 +29,8 @@ exports.message_post = asyncHandler(async (req, res, next) => {
         MESSAGE_TITLE: title,
         MESSAGE_CONTENT: message,
         MESSAGE_TIMESTAMP: timeStamp,
-        MESSAGE_AUTHOR_ID: authorID
+        MESSAGE_AUTHOR_ID: authorID,
+        MESSAGE_APPLAUSE: 0
     })
     await newMessage.save();
     res.redirect('/home');
@@ -51,4 +52,20 @@ exports.delete_message = asyncHandler(async (req, res, next) => {
     } else {
         res.send("stop trying to fuck around")
     }
+})
+
+exports.applaud_message = asyncHandler(async(req, res, next) => { 
+    const user = req.user
+    const messageID = req.params.messageID;
+    const message = await Message.findOne({ MESSAGE_ID: messageID });
+    if (message.MESSAGE_APPLAUSE === undefined) {
+        // If MESSAGE_APPLAUSE doesn't exist in the existing message, initialize it to 1
+        message.MESSAGE_APPLAUSE = 1;
+    } else {
+        // If MESSAGE_APPLAUSE exists, increment it by 1
+        message.MESSAGE_APPLAUSE += 1;
+    }
+    // Save the updated or newly created message
+    await message.save()
+    res.redirect('/home');
 })

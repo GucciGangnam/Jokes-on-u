@@ -44,6 +44,9 @@ router.post('/message', message_controller.message_post);
 // DELETE MESSAGE ??
 router.get('/delete-message/:messageID', message_controller.delete_message)
 
+// APPLUAD MESSAGE
+  router.get('/applaud-message/:messageID', message_controller.applaud_message)
+
 // ACCOUNT //
 router.get("/account", account_controller.account_get)
 router.post("/account", account_controller.code_post)

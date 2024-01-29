@@ -178,6 +178,10 @@ input:invalid {
   font-size: 12px;
 }
 
+.Applaud{
+  text-decoration: none;
+}
+
 .DeleteButton{ 
   text-decoration: none;
   background-color: inherit;
@@ -189,6 +193,7 @@ input:invalid {
   color: white;
   border: 1px solid #45a049;
 }
+
 
 
 /* account */
