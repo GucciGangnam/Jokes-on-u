@@ -2,8 +2,7 @@
 const Users = require("../models/user"); const passport = require('passport');
 // Import async handler
 const asyncHandler = require("express-async-handler");
-// Passport Imports
-const session = require('express-session');
+
 
 exports.login_get = asyncHandler(async (req, res, next) => {
     // dipslay log in page 

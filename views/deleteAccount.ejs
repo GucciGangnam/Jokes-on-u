@@ -34,12 +34,14 @@
         </div>
     </div>
     
-    <form action="/delete-account" method="post">
-        Are you sure you want to dleet your account?
-        - Your account will be un-recoverable 
-        - All your posts will be delted forever
-        <a class="NavButtonLink" href="/">Home</a>
-        <button type="submit">Delete</button>
+    <form action="/delete-account" method="post" class="DelAccForm">
+        <p>Are you sure you want to delete your account?</p>
+        <p>- Your account will be un-recoverable</p>
+        <p>- All your posts will be deleted forever</p>
+        <div>
+            <a class="DelAccBtn" href="/">Home</a>
+            <button class="DelAccBtn" type="submit">Delete</button>
+        </div>
     </form>
 
 </body>

@@ -17,7 +17,7 @@ exports.message_get = asyncHandler(async (req, res, next) => {
 
 exports.message_post = asyncHandler(async (req, res, next) => {
     const title = req.body.title.charAt(0).toUpperCase() + req.body.title.slice(1);
-    const message = req.body.message.charAt(0).toUpperCase() + req.body.title.slice(1);
+    const message = req.body.message.charAt(0).toUpperCase() + req.body.message.slice(1);
     const auther = req.user.USERNAME;
     const authorID = req.user.USER_ID;
     const msgID = ("MSG_ID" + uuid.v4())

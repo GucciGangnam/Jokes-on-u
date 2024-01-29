@@ -9,8 +9,8 @@ const asyncHandler = require("express-async-handler");
 //Validator methods
 const { body, validationResult } = require("express-validator");
 
-// Import passport for authentication
-const passport = require('passport');
+// Login Controller
+const login_controller = require("../controllers/loginController")
 
 // Account Controller 
 exports.account_get = asyncHandler(async (req, res, next) => {
@@ -41,5 +41,11 @@ exports.delete_account_get = asyncHandler(async(req, res, next) => {
 
 exports.delete_account_post = asyncHandler(async(req, res, next) => { 
     const user = req.user;
-    res.send("delete" + user.USERNAME)
+    // Deelete account find user.USERNAME
+    await Users.deleteOne({USERNAME: user.USERNAME})
+    // find and dlete messages by Message_aurthor
+    await Messages.deleteMany({MESSAGE_AUTHOR: user.USERNAME})
+    // Log User Out 
+    login_controller.logout_get
+    res.redirect("/home")
 })

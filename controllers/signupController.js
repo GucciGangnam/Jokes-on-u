@@ -115,7 +115,7 @@ exports.signup_post = [
                 ADMIN: false
             });
             await newMember.save();
-            res.redirect('/home');
+            res.redirect('/login');
         } catch (error) {
             console.error(error);
             next(error); // Call next with the error to pass it to the error handling middleware
