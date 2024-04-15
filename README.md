@@ -6,8 +6,8 @@
 
 This is the members only project assigned by The Odin Project.
 This will be my first fully independent express app built with any sort of basic function.
+The focus of teh project was to nail down and implememnt everythign I had leart about express so far, with a focus on using PassportJS to authenticate users.
 
-The focus on this project is to nail down and put into a real world scenario, everything I have learnt in express with a focus on using PassportJS for authentication.
 ---
 
 
